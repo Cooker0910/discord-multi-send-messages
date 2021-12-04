@@ -46,6 +46,7 @@ func main() {
 		time.Sleep(2 * time.Second)
 		var wg sync.WaitGroup
 		wg.Add(len(tokens))
+
 		start := time.Now()
 		for i := 0; i < len(tokens); i++ {
 			time.Sleep(time.Duration(200) * time.Millisecond)
@@ -54,17 +55,10 @@ func main() {
 				for j := i * (len(members) / len(tokens)); j < (i+1)*(len(members)/len(tokens)); j++ {
 					status := CheckToken(tokens[i])
 					if status != 200 && status != 204 && status != 429 && status != -1 {
-						color.Red("[%v] Token %v might be locked - Stopping instance and adding members to failed list. %v", time.Now().Format("15:05:04"), tokens[i], status)
-						failed = append(failed, members[j:(i+1)*(len(members)/len(tokens))]...)
-						dead = append(dead, tokens[i])
-						err := Append("input/failed.txt", members[j:(i+1)*(len(members)/len(tokens))])
-						if err != nil {
-							fmt.Println(err)
-						}
-						if cfg.Stop {
-							break
-						}
+						fmt.Println(status)
 
+					} else {
+						fmt.Println("OOKOKOKOKO")
 					}
 				}
 			}(i)
