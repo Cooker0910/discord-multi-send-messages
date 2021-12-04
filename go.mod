@@ -1,4 +1,4 @@
-module github.com/V4NSH4J/discord-mass-dm-GO
+module github.com/kkk-dev-910/Discord-mass-DMs
 
 go 1.16
 
